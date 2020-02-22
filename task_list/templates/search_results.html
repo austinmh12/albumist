@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Search Results</h1>
+	<a href="{{ url_for('.search') }}">Return to Search</a>
+	{% if results %}
+		<table>
+			<tbody>
+				<tr>
+					<th>Album ID</th>
+					<th>Artist ID</th>
+					<th>Album Art</th>
+					<th></th>
+					<th></th>
+				</tr>
+				{% for album_id, artist_id, art in results %}
+				<tr>
+					<td>{{ album_id }}</td>
+					<td>{{ artist_id }}</td>
+					<td><img src="{{ art }}" height="128" width="128"></td>
+					<td>
+						<a href="{{ url_for('task_list.album_info', album_id=album_id) }}">Details</a>
+					</td>
+					<td>
+						<a href="{{ url_for('.rate_album', album_id=album_id) }}">
+							<button>Rate</button>
+						</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+	</div>
+	<a href="{{ url_for('.search') }}">Return to Search</a>
+{% endblock %}

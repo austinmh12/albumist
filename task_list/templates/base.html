@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html>
+<head>
+  {% if user %}
+  <title>{{ user.username }} - Albumist</title>
+  {% else %}
+  <title>Albumist</title>
+  {% endif %}
+</head>
+<body>
+  <div>Albumist: 
+    <a href="{{ url_for('task_list.index')}}">Home</a>
+    <a href="{{ url_for('.search') }}">Search</a>
+    {% if current_user.is_anonymous %}
+    <a href="{{ url_for('task_list.login')}}">Login</a>
+    {% else %}
+    <a href="{{ url_for('task_list.spotify') }}">Link Spotify</a>
+    <a href="{{ url_for('task_list.albums', username=current_user.username) }}">Albums</a>
+    <a href="{{ url_for('task_list.logout')}}">Logout</a>
+    {% endif %}
+  </div>
+  <hr>
+  <p>Heel Wurl</p>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</body>
+
+
+<!-- Fonts -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+      rel='stylesheet' type='text/css' />
+<!-- Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet" />
+
+<!-- Bootstrap related JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</html>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Rate {{ name }}</h1>
+	<table>
+		<tbody>
+			<tr>
+				<td rowspan="5">
+					<img src="{{ art }}" width="256" height="256">
+				</td>
+			</tr>
+			<tr>
+				<td>{{ name }}</td>
+			</tr>
+			<tr>
+				<td>{{ artist }}</td>
+			</tr>
+			<tr>
+				<td><a href="{{ link }}">Listen on Spotify</a></td>
+			</tr>
+			<tr>
+				<td>
+					<a href="{{ url_for('task_list.album_info', album_id=album_id) }}">Return to details</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<form action="" method="post" novalidate>
+		{{ form.hidden_tag() }}
+		<table>
+			<tbody>
+				<tr>
+					<th>{{ form.best_track.label }}</th>
+					<th>{{ form.overall_rating.label }}</th>
+					<th>{{ form.production_rating.label }}</th>
+					<th>{{ form.unique_rating.label }}</th>
+					<th>{{ form.enjoyment_rating.label }}</th>
+				</tr>
+				<tr>
+					<td>{{ form.best_track(size=1) }}</td>
+					<td>{{ form.overall_rating(size=1) }}</td>
+					<td>{{ form.production_rating(size=1) }}</td>
+					<td>{{ form.unique_rating(size=1) }}</td>
+					<td>{{ form.enjoyment_rating(size=1) }}</td>
+				</tr>
+				<tr colspan="6">
+					<th>{{ form.thoughts.label }}</th>
+				</tr>
+				<tr colspan="6">
+					<td>{{ form.thoughts(size=512) }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>{{ form.rate() }}</p>
+	</form>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>{{ details[2] }} - Details</h1>
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<a href="{{ url_for('.search') }}">Return to Search</a>
+				</td>
+				<td>
+					<a href="{{ url_for('.rate_album', album_id=album_id) }}">
+						<button>Rate</button>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<table>
+			<tbody>
+				<tr>
+					<td rowspan="5"><img src="{{ details[0] }}" width="320" height="320"></td>
+				</tr>
+				<tr>
+					<td><a href="{{ details[1] }}">{{ details[2] }}</a></td>
+				</tr>
+				<tr>
+					<td>{{ details[3] }}</td>
+				</tr>
+				<tr>
+					<td>{{ details[4] }}</td>
+				</tr>
+				<tr>
+					<td>{{ details[5] }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<tbody>
+				<tr>
+					<th>Track Number</th>
+					<th>Track Name</th>
+				</tr>
+				{% for number, name, link in details[6] %}
+				<tr>
+					<td>{{ number }}</td>
+					<td>
+						<a href="{{ link }}">{{ name }}</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div><br>
+	<p>{{ details[7] }}</p>
+	<a href="{{ url_for('.search') }}">Return to Search</a>
+{% endblock %}
